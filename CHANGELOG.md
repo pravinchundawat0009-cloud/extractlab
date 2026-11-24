@@ -9,6 +9,33 @@ real recorded data.
 
 ## [Unreleased]
 
+### Mango-leaf NADES study (separate from the water–oil rig)
+
+- **2026-11-24** — Added the working protocol for the β-alanine / citric acid monohydrate /
+  water trial at **1:1 molar, 20 wt % total water** (the Design-Expert centre level), plus
+  `nades_recipe.py`, which computes every mass in that document so the prose and the
+  arithmetic cannot diverge. Scope, in the doc's §1: this is bench chemistry upstream of the
+  rig, **not** part of the automated water–oil pipeline — no existing module was touched.
+  - **Corrected three errors in the earlier, ad-hoc recipe drafts:** the making-the-solvent
+    step had **no temperature and no time** (published synthesis for exactly this solvent is
+    70 ± 2 °C, 120 min); the trial used 20 mL solvent per 0.50 g leaf = 1:40 g/mL where the
+    published ratio is 1:60 (30 mL gives it exactly); and a 100 g batch is only ≈83 mL, short
+    of the 120 mL needed for 3 samples + 1 blank.
+  - **Two arithmetic errors of mine, caught by the tests rather than by review:** a claim
+    that 20 wt % water is 1:1:2.46 molar (it is 1:1:3.90), and a claim that the monohydrate
+    and anhydrous routes give different water wt % (both give 16.1 wt % — the hydrate changes
+    only what you weigh, not the solvent). Both are now regression-tested, and the doc says so
+    out loud rather than quietly deleting the wrong numbers.
+  - **Verified:** `python3 -m pytest -q` — **75 passed** (57 new: 48 in
+    `test_nades_recipe.py`, 9 in `test_docs_consistency.py`; plus the 18 pre-existing). The
+    doc-consistency tests were themselves checked by deliberately corrupting a ladder row in
+    `docs/MANGO_LEAF_TRIAL.md` and confirming 3 of them fail, then restoring it. The module's
+    100 g / 20 wt % result reproduces the stated weighing (25.34 / 59.78 / 14.88 g) to
+    0.01 g and both invariants to 1e-6.
+  - **Not verified, and cannot be from here:** the solvent has not been made, no HPLC has
+    been run, and the yield is not measured. `ASSUMED_DENSITY_G_ML = 1.20` in
+    `nades_recipe.py` is a placeholder — §A6 of the protocol requires measuring it.
+
 ### Scope and hardware changes (documentation sync)
 
 - **2026-10-13** — Three real-world changes, confirmed by the advisor/hardware in hand, synced across every doc

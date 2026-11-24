@@ -186,9 +186,20 @@ pip install -r requirements.txt                  # flask, opencv-python-headless
 | `realtime_stream.py` | Live MJPEG stream + status panel at `http://<pi-ip>:5000` (needs `picamera2` + a camera); in-browser recording to `records/`; a watchdog that recovers from a stalled camera |
 | `run_stream.sh` | Supervisor that relaunches `realtime_stream.py` whenever it exits |
 | `track_log.py` | Polls `/status` from another machine and writes a CSV |
-| `tests/` | `pytest` suite — `test_tracking.py` (temporal-filter spec, clauses S1-S6) and `test_volume_model.py` |
+| `tests/` | `pytest` suite — `test_tracking.py` (temporal-filter spec, clauses S1-S6), `test_volume_model.py`, `test_nades_recipe.py` (solvent batch arithmetic) and `test_docs_consistency.py` (protocol vs. code) |
+| `nades_recipe.py` | Batch arithmetic for the separate mango-leaf NADES study — mass / water wt % / molar ratio, density and volume, mangiferin yield. Stdlib only; not on the Pi's critical path |
 | `records/` | CSV output from drain-test runs, one row per frame |
 | `requirements.txt` | Dependencies and the picamera2 install note |
+
+### Separate study: the mango-leaf NADES extraction
+
+Not part of the water–oil rig's critical path, but kept in this repo so it is versioned and
+tested like everything else: [`docs/MANGO_LEAF_TRIAL.md`](docs/MANGO_LEAF_TRIAL.md) is the full
+bench protocol (β-alanine : citric acid monohydrate : water, 1:1 molar, 20 wt % water) and
+[`nades_recipe.py`](nades_recipe.py) computes every mass in it, so the document and the
+arithmetic cannot drift apart (`tests/test_docs_consistency.py` enforces that). Read §1 of that
+document before pointing the camera at a NADES — a 2350 cP light-brown liquid is a different
+imaging problem from clear water and yellow oil.
 
 Every script runs stand-alone (`python3 demo.py`, `python3 turbidity_dct.py`, ...) for a synthetic-data
 self-check, and `python3 -m pytest -q` runs the full unit suite. See `CLAUDE.md` for the full architecture and
