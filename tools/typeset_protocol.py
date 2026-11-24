@@ -197,6 +197,12 @@ class Block:
         self.extra = extra or {}
 
 
+def strip_html_comments(text: str) -> str:
+    """Drop <!-- ... --> blocks. They are notes to the build, not content, and a trailing one
+    otherwise renders as an orphan page holding a single line."""
+    return re.sub(r"<!--.*?-->", "", text, flags=re.S)
+
+
 def parse_markdown(lines: list[str]) -> list[Block]:
     """Turn the document's Markdown into a list of typed blocks. Unknown input raises."""
     blocks: list[Block] = []
@@ -557,11 +563,17 @@ class OutlineDoc(BaseDocTemplate):
         self.canv.addOutlineEntry(text, key, level=level, closed=level > 0)
 
 
-def make_doc(path: Path) -> BaseDocTemplate:
+def make_doc(path: Path, footer_text: str, doc_title: str) -> BaseDocTemplate:
+    """`footer_text` / `doc_title` come from the source document, never hardcoded.
+
+    They used to be fixed strings, so rendering a second document (TRIAL_RUNSHEET.md) put the
+    first document's title in the footer and the PDF metadata - an error a reader sees on
+    every page.
+    """
     doc = OutlineDoc(
         str(path), pagesize=A4,
         leftMargin=17 * mm, rightMargin=17 * mm, topMargin=18 * mm, bottomMargin=17 * mm,
-        title="Mango-leaf NADES trial - complete working protocol",
+        title=doc_title,
         author="extractlab", subject="beta-alanine / citric acid / water NADES, 1:1 molar, 20 wt% water",
         creator="tools/typeset_protocol.py",
     )
@@ -576,7 +588,7 @@ def make_doc(path: Path) -> BaseDocTemplate:
         canv.setLineWidth(0.5)
         y = d.bottomMargin - 6.5 * mm
         canv.line(d.leftMargin, y + 3.4 * mm, d.leftMargin + d.width, y + 3.4 * mm)
-        canv.drawString(d.leftMargin, y, "Mango-leaf NADES trial - beta-alanine / citric acid / water, 1:1 molar, 20 wt % water")
+        canv.drawString(d.leftMargin, y, footer_text)
         canv.drawRightString(d.leftMargin + d.width, y, f"page {d.page}")
         canv.restoreState()
 
@@ -594,8 +606,14 @@ def build(src: Path = SRC, out: Path = OUT) -> Path:
     if missing:
         raise SystemExit("error: font cannot render: " + ", ".join(f"{c} {cp}" for c, cp in missing))
 
-    blocks = parse_markdown(text.splitlines())
-    doc = make_doc(out)
+    blocks = parse_markdown(strip_html_comments(text).splitlines())
+
+    # title = first h1, used for the footer and the PDF metadata
+    doc_title = next((b.payload for b in blocks if b.kind == "h1"), src.stem)
+    footer = _outline_text(doc_title)
+    if len(footer) > 105:
+        footer = footer[:102].rstrip() + "..."
+    doc = make_doc(out, footer, footer)
     width = doc.width
 
     story: list = []

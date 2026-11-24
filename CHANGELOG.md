@@ -32,7 +32,28 @@ real recorded data.
     `docs/MANGO_LEAF_TRIAL.md` and confirming 3 of them fail, then restoring it. The module's
     100 g / 20 wt % result reproduces the stated weighing (25.34 / 59.78 / 14.88 g) to
     0.01 g and both invariants to 1e-6.
+<<<<<<< HEAD
   - **2026-11-24** — Typeset the same protocol to **`docs/MANGO_LEAF_TRIAL.pdf`**
+=======
+  - **2026-11-24** — Added **`docs/TRIAL_RUNSHEET.md`** / `.pdf` ("How I would run this trial"):
+  my own 3-day execution order, written as decisions rather than a restatement of the protocol.
+  Two deliberate departures from the protocol, both argued in the document: make a **20 g scout
+  batch first** (5.07 / 11.96 / 2.98 g) to prove the solvent forms at 20 wt % before committing
+  240 g, and **start the leaf moisture test first thing** because it is the divisor in the final
+  yield. It also ranks where the plan is most likely to fail - the honest first answer being
+  that the static 3 h step may not reach equilibrium, with the triplicate SD as the diagnostic.
+- **2026-11-24** — Renderer fixes found by rendering the second document: the footer and PDF
+  metadata were **hardcoded to the first document's title**, so the run sheet's every page was
+  footed "Mango-leaf NADES trial"; both are now derived from the source's first `h1`. A trailing
+  build note also rendered as a one-line orphan page 5 - `<!-- ... -->` blocks are now stripped
+  before parsing, and the note is an HTML comment instead of visible text. Run sheet went 5
+  pages (with an orphan) -> 4 clean pages.
+  **Verified:** both PDFs' text extracted and compared line by line against their Markdown
+  (run sheet 134/134 lines, protocol 397/397 minus one line that legitimately continues across a
+  page break); both titles correct in metadata; all pages of both rendered and inspected;
+  `python3 -m pytest -q` - 75 passed.
+- **2026-11-24** — Typeset the same protocol to **`docs/MANGO_LEAF_TRIAL.pdf`**
+>>>>>>> bab1b26 (docs: add my own trial run sheet + fix renderer title/footer)
     (12 pages, A4, PDF bookmarks) with a purpose-built renderer, `tools/typeset_protocol.py`,
     because no pandoc / LaTeX / cairo exists in the target environment and there is no root
     to install them (ReportLab + the DejaVu fonts already present). Regenerate with
