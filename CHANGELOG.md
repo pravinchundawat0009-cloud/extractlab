@@ -35,7 +35,20 @@ real recorded data.
 <<<<<<< HEAD
   - **2026-11-24** — Typeset the same protocol to **`docs/MANGO_LEAF_TRIAL.pdf`**
 =======
-  - **2026-11-24** — The leaf powder is already dried (confirmed by the user), so step 11 of
+  - **2026-11-24** — Added **`docs/DAY2.md`** / `.pdf` (6 pages): Day 2 in full - the extraction,
+  hour by hour. Starts by turning the Day 1 density into a mass table (so nobody converts by hand at
+  the balance), gives a clock-by-clock timeline with active time per step, then covers the three
+  things that must be right before the bath (bath actually at 45 C, leaf weighed not estimated, same
+  lid on all four), loading by weight, the untouched 3 hours, the moisture calculation with a worked
+  example, cooling/centrifuging/decanting, and an HPLC handover note the user can copy verbatim. Ends
+  with an end-of-day checklist and a nine-row troubleshooting table.
+- **2026-11-24** — Renderer: fixed a recurring orphan-page class. A trailing `---` plus a short
+  closing paragraph landed alone on a final page (DAY2 first draft was 7 pages with page 7 holding one
+  sentence). The heading-glue now refuses to absorb a horizontal rule, and DAY2's redundant closing
+  section was merged into the preceding paragraph, giving 6 dense pages. All four PDFs re-checked:
+  last-page character counts are now 2036-3284 (no near-empty finals), and every document's Markdown
+  still matches its PDF line for line (172/172, 220/220, 134/134, 397/397).
+- **2026-11-24** — The leaf powder is already dried (confirmed by the user), so step 11 of
   `STEP_GUIDE.md` was rewritten from "start the moisture test" to "**still** run the moisture test".
   "Dried" describes the process, not the residual water: air-dried leaf typically holds 5-12 %, every
   published mango-leaf figure is on a dry-weight basis, and "it was dried" is not a value that can go

@@ -722,7 +722,12 @@ def _glue_headings(story: list) -> list:
             while j < len(story) and getattr(story[j], "_is_filler", False):
                 group.append(story[j])
                 j += 1
-            if j < len(story) and not isinstance(story[j], Table):
+            # glue the next block, unless it is a table (too tall to keep whole safely) or a
+            # horizontal rule (the closing rule would then be what gets orphaned onto a page
+            # of its own - exactly what happened to DAY2.pdf's final disclaimer line)
+            if (j < len(story)
+                    and not isinstance(story[j], Table)
+                    and not isinstance(story[j], HRFlowable)):
                 group.append(story[j])
                 j += 1
             out.append(KeepTogether(group))
@@ -730,6 +735,7 @@ def _glue_headings(story: list) -> list:
         else:
             out.append(item)
             i += 1
+
     return out
 
 
