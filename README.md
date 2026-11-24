@@ -194,7 +194,9 @@ pip install -r requirements.txt                  # flask, opencv-python-headless
 ### Separate study: the mango-leaf NADES extraction
 
 Not part of the water–oil rig's critical path, but kept in this repo so it is versioned and
-tested like everything else: [`docs/MANGO_LEAF_TRIAL.md`](docs/MANGO_LEAF_TRIAL.md) is the full
+tested like everything else. **Start here:** [`docs/STEP_GUIDE.md`](docs/STEP_GUIDE.md) — a
+21-step walkthrough from an empty bench to four tubes handed to the HPLC lab, with nothing to
+decide along the way. For the reasoning behind each step, [`docs/MANGO_LEAF_TRIAL.md`](docs/MANGO_LEAF_TRIAL.md) is the full
 bench protocol (β-alanine : citric acid monohydrate : water, 1:1 molar, 20 wt % water) and
 [`nades_recipe.py`](nades_recipe.py) computes every mass in it, so the document and the
 arithmetic cannot drift apart (`tests/test_docs_consistency.py` enforces that). Read §1 of that

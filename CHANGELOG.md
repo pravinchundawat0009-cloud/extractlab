@@ -35,7 +35,13 @@ real recorded data.
 <<<<<<< HEAD
   - **2026-11-24** — Typeset the same protocol to **`docs/MANGO_LEAF_TRIAL.pdf`**
 =======
-  - **2026-11-24** — Added **`docs/TRIAL_RUNSHEET.md`** / `.pdf` ("How I would run this trial"):
+  - **2026-11-24** — Added **`docs/STEP_GUIDE.md`** / `.pdf`: a 21-step, start-to-finish bench
+  walkthrough answering "guide me step by step, everything from scratch". Written for someone who
+  is confused, so it is deliberately different in shape from the other two documents: **no choices,
+  no reasoning to follow, one linear path**. Every step has the same four parts - what to do, what
+  you should see, what to do if you do not, and why it matters - plus a tick-box record sheet at the
+  end and a three-line explanation of where the numbers come from.
+- **2026-11-24** — Added **`docs/TRIAL_RUNSHEET.md`** / `.pdf` ("How I would run this trial"):
   my own 3-day execution order, written as decisions rather than a restatement of the protocol.
   Two deliberate departures from the protocol, both argued in the document: make a **20 g scout
   batch first** (5.07 / 11.96 / 2.98 g) to prove the solvent forms at 20 wt % before committing
