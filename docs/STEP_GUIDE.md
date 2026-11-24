@@ -146,17 +146,29 @@ your weighing of the water.
 
 ## Part 2 — Prepare the leaf (about 20 minutes, can run during Part 1)
 
-### Step 11 — Start the moisture test
+### Step 11 — Still run the moisture test. "Already dried" is a claim, not a number.
 
 While the solvent is still stirring, weigh about **1.0 g** of leaf powder into a small, pre-weighed
 dish. Write down the exact mass and the dish's empty mass.
 
 Put it in the oven at **105 °C for 2 hours**. Write the start time on the dish.
 
-**Why:** the final answer is "how much mangiferin per gram of DRY leaf", and this test is how you know
-what "dry" means. It costs you no attention — it just sits there.
-
 Take it out after 2 hours, let it cool in a desiccator, and weigh it. That is your moisture number.
+
+**Why, even though your leaf is dried:** the final answer is "how much mangiferin per gram of dry
+leaf", and "dried" describes the process someone used, not how much water is left in the powder. Air-dried
+leaf can still hold 8–12 %. Every published mango-leaf figure is quoted on a dry-weight basis, so at
+report time a reviewer asks what your moisture was — and "it was dried" is not an answer you can put in
+a table.
+
+Honest expectation: air-dried and ground leaf typically comes out **5–12 % moisture**. Anything in that
+range is normal and is not a problem. You are not drying it again; you are measuring it once so the
+number in your report is defined.
+
+**If it comes back above 15 %:** the leaf was not really dry, and it is worth mentioning to your
+supervisor before the extraction, because 15 % water going into a 20 wt % water solvent changes the
+solvent composition in that container. **If it comes back under 2 %:** unusually dry, but harmless —
+just use the measured value. Either way, the measured number is what goes into the calculation.
 
 ### Step 12 — Weigh 0.500 g of leaf into each of three labelled containers
 
@@ -277,6 +289,18 @@ When the numbers come back, the yield is:
 mg mangiferin per g dry leaf = (sample − blank) × 30 × dilution ÷ 1000 ÷ (0.500 × (1 − moisture))
 ```
 
+Worked, with made-up numbers: the lab reports 70 µg/mL, blank 2 µg/mL, dilution 5, moisture 8 %.
+
+```
+(70 − 2) × 30 × 5 ÷ 1000 = 10.2 mg of mangiferin in the tube
+0.500 × (1 − 0.08)      = 0.46 g of actual dry leaf
+10.2 ÷ 0.46             = 22.2 mg per g dry leaf
+```
+
+Notice the correction **raises** the answer (20.4 → 22.2 with these numbers) because 0.5 g of
+slightly damp leaf contains less than 0.5 g of actual leaf. Forgetting it understates your yield by
+about the moisture percentage.
+
 An honest expectation: if your leaf is 2 % mangiferin by weight and you recover half of it, the lab
 should report roughly **40–70 µg/mL** in the diluted solution. If they report **under 5 µg/mL**,
 suspect the dilution or the cleanup before you suspect the leaf. If they report something off the top
@@ -321,8 +345,9 @@ Copy this into your notebook. Tick as you go.
 **Leaf**
 
 - ☐ Moisture dish, empty: ______ g
-- ☐ Moisture dish + leaf: ______ g
+- ☐ Moisture dish + leaf before drying: ______ g
 - ☐ After 2 h at 105 °C: ______ g
+- ☐ Moisture % = (before − after) ÷ (before − empty) × 100 = ______ %
 - ☐ M1 leaf mass: ______ g
 - ☐ M2 leaf mass: ______ g
 - ☐ M3 leaf mass: ______ g
@@ -367,6 +392,35 @@ That prints the table for 100 g and for 40/50/70/80 mL batches.
 ```
 python3 -c "import nades_recipe as n; print(n.for_solids(beta_alanine_g=60.55).table())"
 ```
+
+---
+
+## The bench card — photograph this one
+
+Everything you need at the bench, nothing else.
+
+| Do this | With this |
+|---|---|
+| Weigh into the big beaker | **143.47 g** citric acid monohydrate |
+| Add | **60.83 g** β-alanine |
+| Stir the dry powders | 30 seconds |
+| Add water in 5 portions | **35.70 g** total |
+| Heat + stir in water bath | **70 °C**, until clear, **60–120 min**, stop at **2.5 h** |
+| Meanwhile: oven | **1.0 g** leaf, **105 °C, 2 h** → moisture % |
+| Cool, then measure density | 10 mL cylinder, weigh empty and full, twice |
+| Leaf into M1, M2, M3 | **0.500 g** each, weighed and written down |
+| Solvent into all four | **30 × density = ~36.0 g** each, **weighed not pipetted** |
+| Stir each | 10 seconds, own rod |
+| Lids | same type, same tightness, all four |
+| Water bath | **45 °C, 3 h, do not touch** |
+| Then | cool → centrifuge **20 000 × g, 30 min** → tube → **−20 °C** |
+| Hand over | M1, M2, M3, **BLANK** + 4 notes to the HPLC lab |
+
+**Stop and ask your supervisor if:** the solvent is gritty after 2.5 h, crystals appear overnight, or
+two layers form. **Do not add water to fix it.**
+
+**The three numbers that go in the report:** mangiferin mg/g dry leaf (mean ± SD of M1, M2, M3), the
+moisture %, and the solvent density you measured.
 
 ---
 

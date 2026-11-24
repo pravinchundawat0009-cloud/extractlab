@@ -35,7 +35,18 @@ real recorded data.
 <<<<<<< HEAD
   - **2026-11-24** — Typeset the same protocol to **`docs/MANGO_LEAF_TRIAL.pdf`**
 =======
-  - **2026-11-24** — Added **`docs/STEP_GUIDE.md`** / `.pdf`: a 21-step, start-to-finish bench
+  - **2026-11-24** — The leaf powder is already dried (confirmed by the user), so step 11 of
+  `STEP_GUIDE.md` was rewritten from "start the moisture test" to "**still** run the moisture test".
+  "Dried" describes the process, not the residual water: air-dried leaf typically holds 5-12 %, every
+  published mango-leaf figure is on a dry-weight basis, and "it was dried" is not a value that can go
+  in a results table. Added the expected range, what to do above 15 % / under 2 %, a worked example
+  showing the correction **raises** the yield (20.4 -> 22.2 mg/g at 8 % moisture, because 0.5 g of
+  damp leaf is less than 0.5 g of leaf), and a moisture % line on the record sheet.
+  Also added a one-page **bench card** at the end of the guide - the 14 actions with their numbers,
+  sized to be photographed and taken to the bench - which uses what was otherwise a blank final page.
+  **Verified:** 220/220 markdown lines present in the PDF, all 7 pages rendered and inspected, both
+  worked-example figures re-computed against `nades_recipe.mangiferin_mg_per_g_dw` (20.4 and 22.2).
+- **2026-11-24** — Added **`docs/STEP_GUIDE.md`** / `.pdf`: a 21-step, start-to-finish bench
   walkthrough answering "guide me step by step, everything from scratch". Written for someone who
   is confused, so it is deliberately different in shape from the other two documents: **no choices,
   no reasoning to follow, one linear path**. Every step has the same four parts - what to do, what
