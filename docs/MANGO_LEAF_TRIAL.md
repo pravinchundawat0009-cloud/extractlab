@@ -5,7 +5,7 @@ Prepared 2026-11-24 · supersedes the earlier, fragmentary recipe drafts · comp
 [`nades_recipe.py`](../nades_recipe.py) · tests: [`tests/test_nades_recipe.py`](../tests/test_nades_recipe.py)
 
 > **Every mass, ratio and conversion in this document is computed by `nades_recipe.py` and
-> checked by 48 automated tests, not typed by hand.** Where an earlier draft of this
+> checked by 57 automated tests, not typed by hand.** Where an earlier draft of this
 > protocol was wrong, the error and the correction are called out in `⚠` boxes, because
 > knowing *why* a number changed is what stops it drifting back.
 
@@ -482,12 +482,15 @@ an assumption into a measurement.
 | β-alanine actual mass (g) | |
 | Citric acid monohydrate actual mass (g) | |
 | Water actual mass (g) | |
-| Total (g) / water wt % / molar ratio | | ← compute from the *actual* masses, not the targets
+| Total (g) / water wt % / molar ratio | |
 | Bath temperature(s) during synthesis | |
 | Stirring time to clarity (min) | |
 | Appearance, colour, any crystals | |
 | Density at 25 °C (g/mL), replicate 1 / 2 | |
 | Volume of solvent obtained (mL) | |
+
+> Compute the "Total / water wt % / molar ratio" row from the **actual** masses you weighed,
+> not the targets. That is the number that goes in the report.
 
 **Each container** (one column per container: `M1`, `M2`, `M3`, `BLANK`)
 
@@ -519,7 +522,7 @@ calibration range, blank result.
 | 5 | Aliquots come out short | Pipetting a viscous liquid | Weigh instead (§A6) |
 | 6 | Colours differ between M1–M3 | Uneven wetting, or lids of different tightness (evaporation) | Note it; it is exactly what the SD is for. Use identical lids next time |
 | 7 | Blank shows a big peak at mangiferin RT | Carryover from a previous injection, dirty SPE cartridge, or column equilibration | Have the lab re-run the blank last; check cartridge lot |
-| 8 | Yield ≪ literature | Expected — static 45 °C is slower than 30 min stirred or 5 min ultrasound (§B4) | Report as a limitation; next experiment is time/agitation, not more water levels |
+| 8 | Yield far below literature | Expected — static 45 °C is slower than 30 min stirred or 5 min ultrasound (§B4) | Report as a limitation; next experiment is time/agitation, not more water levels |
 | 9 | HPLC says "cannot inject this" | Raw NADES, too viscous, too acidic | Send the SPE eluate (§C1) |
 
 ---
@@ -582,11 +585,21 @@ And two sentences that will earn you credit, both drawn from this document:
 |---|---|
 | `nades_recipe.py` | **New.** Stdlib-only batch arithmetic: mass/water-wt %/molar-ratio solving, volume and density conversion, water ladder, solid:liquid ratio, mangiferin yield. Not on the Pi's critical path; importable anywhere. |
 | `tests/test_nades_recipe.py` | **New.** 48 tests: the documented 100 g weighing is asserted exactly, both invariants (1:1 molar, 20 wt %) are re-derived, the ratio/wt % confusion has a regression test, and the yield maths is checked against hand calculations. |
+| `tests/test_docs_consistency.py` | **New.** 9 tests that read **this document** and assert its tables and figures against the module, so the prose cannot drift from the arithmetic. |
 | `docs/MANGO_LEAF_TRIAL.md` | **New.** This protocol. |
+| `docs/MANGO_LEAF_TRIAL.pdf` | **New.** This protocol typeset for reading/printing, generated from the Markdown by `tools/typeset_protocol.py`. |
+| `tools/typeset_protocol.py` | **New.** Markdown → PDF renderer for this document (ReportLab + DejaVu; no pandoc/LaTeX in the target environment). Fails loudly on any unknown construct rather than dropping text. |
 | `README.md`, `CHANGELOG.md` | Linked/noted, so the chemistry work is no longer invisible in a water–oil repo. |
 
-`python3 -m pytest -q` → 66 passed (48 new + 18 existing). The existing water–oil code was
+`python3 -m pytest -q` → **75 passed** (57 new + 18 existing). The existing water–oil code was
 not touched.
+
+Regenerate the PDF after any edit here:
+
+```bash
+python3 -m pip install reportlab pypdf          # or into the venv
+python3 tools/typeset_protocol.py               # writes docs/MANGO_LEAF_TRIAL.pdf
+```
 
 ---
 

@@ -32,6 +32,27 @@ real recorded data.
     `docs/MANGO_LEAF_TRIAL.md` and confirming 3 of them fail, then restoring it. The module's
     100 g / 20 wt % result reproduces the stated weighing (25.34 / 59.78 / 14.88 g) to
     0.01 g and both invariants to 1e-6.
+  - **2026-11-24** — Typeset the same protocol to **`docs/MANGO_LEAF_TRIAL.pdf`**
+    (12 pages, A4, PDF bookmarks) with a purpose-built renderer, `tools/typeset_protocol.py`,
+    because no pandoc / LaTeX / cairo exists in the target environment and there is no root
+    to install them (ReportLab + the DejaVu fonts already present). Regenerate with
+    `python3 tools/typeset_protocol.py`.
+    - The renderer fails loudly rather than dropping content: unknown Markdown constructs
+      raise, a table with a blank line inside it raises, and any character outside ASCII is
+      checked against the embedded font's cmap first.
+    - **Four document bugs were found by rendering it, three of which also broke the Markdown
+      on GitHub:** a literal `≪` where "far below" was meant (glyph check caught it); a stray
+      pipe that split a 3-cell row of the record-sheet table; an inline note that split that
+      table into two; and a stale "66 passed (48 new)" that had drifted from the real 75.
+    - **Renderer bugs found by reading the output, not by the build succeeding:** nested
+      bold-inside-italic double-escaped into literal `<b>` tags; a code span wrapped across
+      two blockquote lines rendered with visible backticks; a numeric-column heuristic
+      collapsed a "5 mg" column to one letter per line; and section 10's heading was stranded
+      as a widow at the foot of page 11. All fixed and re-checked page by page.
+    - **Verified:** all 12 pages rendered to PNG and inspected; PDF text extracted and compared
+      against the Markdown line by line (398 substantial lines, all present); bookmarks list all
+      12 sections and 24 subsections; `python3 -m pytest -q` — 75 passed; `python3 demo.py` —
+      `RESULT: PASS`.
   - **Not verified, and cannot be from here:** the solvent has not been made, no HPLC has
     been run, and the yield is not measured. `ASSUMED_DENSITY_G_ML = 1.20` in
     `nades_recipe.py` is a placeholder — §A6 of the protocol requires measuring it.
